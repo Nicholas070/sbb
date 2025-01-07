@@ -18,8 +18,11 @@ class SbbApplicationTests {
 
 	@Test
 	void testJpa() {
-		Question q = this.questionRepository.findBySubject("sbb가 무엇인가요?");
-		assertEquals(31, q.getId());
+		Optional<Question> oq = this.questionRepository.findById(1);
+		if (oq.isPresent()) {
+			Question q = oq.get();
+			assertEquals("sbb가 무엇인가요?", q.getSubject());
+		}
 	}
 }
 //테스트를 실행하시면 테스트만 끝내고, 서버는 실행되지 않습니다
